@@ -2,7 +2,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-image:url(walpaperryi.jpeg);
+    background-image:url(../imgs/walpaperryi.jpeg);
     display: flex;
     justify-content: center;
     align-items: center;
