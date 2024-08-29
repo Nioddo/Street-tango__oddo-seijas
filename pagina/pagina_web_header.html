@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marca Urbana</title>
+    <link rel="stylesheet" href="pagina_web_header_styles.css">
+</head>
+<body>
+    <header>
+        <div id="container">
+            <button class="icon">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAExJREFUSEtjZKAxYKSx+QyjFhAM4QEJov8EnYVfAYqjsfmA5hZQ6AFU7QMSBzT3Ac3jgOYW0DyIhr4FNI8Dmlsw9ONg1AcoIUDz0hQAbegGGXzv/l0AAAAASUVORK5CYII="/>
+            </button>
+
+            <div id="logo">
+                <img src="../imgs/logo-st-tango2.png" alt="Producto 1">
+            </div>
+
+        
+            <button class="icon">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/>
+            </button>
+    </header>
+
+    <body>
+    
+        <div id="slider-frame">
+            <ul>
+                <li><img src="../imgs/slider_1.jpg" alt=""></li>
+                <li><img src="../imgs/slider_2.jpg" alt=""></li>
+                <li><img src="../imgs/slider_3.jpg" alt=""></li>
+            </ul>
+        </div>
+        
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</div>
+
+<script>
+    // JavaScript embebido para controlar el carrusel
+    let slideIndex = 0;
+    let slides = document.querySelectorAll('.slides img');
+    let autoChange;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function moveSlide(n) {
+        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        showSlide(slideIndex);
+        resetAutoChange();
+    }
+
+    function autoChangeSlide() {
+        moveSlide(1);
+    }
+
+    function resetAutoChange() {
+        clearInterval(autoChange);
+        autoChange = setInterval(autoChangeSlide, 15000); // Cambia cada 15 segundos
+    }
+
+    // Mostrar la primera imagen
+    showSlide(slideIndex);
+
+    // Iniciar el cambio automático
+    autoChange = setInterval(autoChangeSlide, 15000);
+</script>
+    </body>
+
+    <footer>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+:root{
+    --blanco: #ffffff;
+}
+
+body{
+    margin: 0;
+}
+/* Estilo general del header */
+header {
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    transition: background-color 0.3s;
+}
+
+header:hover{
+    background-color: var(--blanco);
+
+}
+/* Contenedor de los elementos del header */
+#container {
+    width: 100%; 
+    display: flex; 
+    justify-content: space-between;
+
+}
+
+/* Estilo del botón del menú */
+.icon {
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    width: 9%; 
+    max-width: 50px; 
+}
+
+/* Estilo del logo */
+#logo {
+    width: 75px;
+}
+
+#logo img{
+    width: 100%;
+}
+
+.slider-frame {
+    width: 200px;
+    height: auto;
+    overflow: hidden;
+    animation: slide 15s infinite;
+}
+
+#slider-frame ul{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 400%;
+}
+
+#slider-frame li{
+    list-style: none;
+    width: 100%;
+}
+
+#slider-frame img{
+    width: 100%;
+    width: 50rem;
+}
