@@ -23,57 +23,49 @@
             </button>
     </header>
 
-    <body>
-    
-        <div id="slider-frame">
-            <ul>
-                <li><img src="../imgs/slider_1.jpg" alt=""></li>
-                <li><img src="../imgs/slider_2.jpg" alt=""></li>
-                <li><img src="../imgs/slider_3.jpg" alt=""></li>
-            </ul>
-        </div>
-        
+    <div id="slider-frame">
+        <ul>
+            <li><img src="../imgs/slider_12.jpg.jpg" alt="Slide 1"></li>
+            <li><img src="../imgs/slider_22.jpg.jpg" alt="Slide 2"></li>
+            <li><img src="../imgs/slider_32.jpg.jpg" alt="Slide 3"></li>
+        </ul>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </div>
-    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-    <button class="next" onclick="moveSlide(1)">&#10095;</button>
-</div>
 
-<script>
-    // JavaScript embebido para controlar el carrusel
-    let slideIndex = 0;
-    let slides = document.querySelectorAll('.slides img');
-    let autoChange;
+    <script>
+        // JavaScript embebido para controlar el carrusel
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('#slider-frame ul li');
+        let autoChange;
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            if (i === index) {
-                slide.classList.add('active');
-            }
-        });
-    }
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = (i === index) ? 'block' : 'none';
+            });
+        }
 
-    function moveSlide(n) {
-        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        function moveSlide(n) {
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            showSlide(slideIndex);
+            resetAutoChange();
+        }
+
+        function autoChangeSlide() {
+            moveSlide(1);
+        }
+
+        function resetAutoChange() {
+            clearInterval(autoChange);
+            autoChange = setInterval(autoChangeSlide, 15000); // Cambia cada 15 segundos
+        }
+
+        // Mostrar la primera imagen
         showSlide(slideIndex);
-        resetAutoChange();
-    }
 
-    function autoChangeSlide() {
-        moveSlide(1);
-    }
-
-    function resetAutoChange() {
-        clearInterval(autoChange);
-        autoChange = setInterval(autoChangeSlide, 15000); // Cambia cada 15 segundos
-    }
-
-    // Mostrar la primera imagen
-    showSlide(slideIndex);
-
-    // Iniciar el cambio automático
-    autoChange = setInterval(autoChangeSlide, 15000);
-</script>
+        // Iniciar el cambio automático
+        autoChange = setInterval(autoChangeSlide, 15000);
+    </script>
     </body>
 
     <footer>

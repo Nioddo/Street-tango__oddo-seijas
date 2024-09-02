@@ -12,6 +12,7 @@ header {
     height: 70px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    background-color: #ffffff69;
     display: flex; 
     align-items: center; 
     justify-content: space-between;
@@ -20,6 +21,7 @@ header {
 
 header:hover{
     background-color: var(--blanco);
+    box-shadow: 0px 0px 15px rgba(10, 10, 10, 0.822);
 
 }
 /* Contenedor de los elementos del header */
@@ -30,7 +32,6 @@ header:hover{
 
 }
 
-/* Estilo del botón del menú */
 .icon {
     background: none; 
     border: none; 
@@ -39,7 +40,6 @@ header:hover{
     max-width: 50px; 
 }
 
-/* Estilo del logo */
 #logo {
     width: 75px;
 }
@@ -48,26 +48,43 @@ header:hover{
     width: 100%;
 }
 
-.slider-frame {
-    width: 200px;
-    height: auto;
+
+#slider-frame {
     overflow: hidden;
-    animation: slide 15s infinite;
 }
 
-#slider-frame ul{
+#slider-frame ul {
     display: flex;
     padding: 0;
     margin: 0;
-    width: 400%;
-}
-
-#slider-frame li{
     list-style: none;
-    width: 100%;
+    transition: transform 0.5s ease-in-out;
 }
 
-#slider-frame img{
-    width: 100%;
-    width: 50rem;
+#slider-frame li {
+    min-width: 100%;
+    box-sizing: border-box;
 }
+
+#slider-frame img {
+    width: 100%;
+    height: 75%;
+}
+
+.active {
+    display: block;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 24vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 1%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev { left: 0; }
+.next { right: 0; }
