@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inconsolata:wght@200..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 :root{
     --blanco: #ffffff;
 }
@@ -20,7 +23,7 @@ header {
 }
 
 header:hover{
-    background-color: var(--blanco);
+    background-color: var(--blanco);@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
     box-shadow: 0px 0px 15px rgba(10, 10, 10, 0.822);
 
 }
@@ -80,7 +83,7 @@ header:hover{
     top: 24vw;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    border: none;
+    border: none;@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
     padding: 1%;
     cursor: pointer;
     z-index: 10;
@@ -88,3 +91,23 @@ header:hover{
 
 .prev { left: 0; }
 .next { right: 0; }
+
+#imgs-info{
+    display: flex;
+    margin: 0;
+    gap: 2%;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: Barlow;
+}
+.info-icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    font-family: Barlow;
+}
+.info-icons img{
+width: 50%;
+}
