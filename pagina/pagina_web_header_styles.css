@@ -98,7 +98,6 @@ header:hover{
     gap: 2%;
     align-items: flex-start;
     justify-content: center;
-    font-family: Barlow;
 }
 .info-icons{
     display: flex;
