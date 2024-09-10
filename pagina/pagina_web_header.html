@@ -9,9 +9,35 @@
 <body>
     <header>
         <div id="container">
-            <button class="icon">
+
+            <button id="toggleButton" class="icon">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAExJREFUSEtjZKAxYKSx+QyjFhAM4QEJov8EnYVfAYqjsfmA5hZQ6AFU7QMSBzT3Ac3jgOYW0DyIhr4FNI8Dmlsw9ONg1AcoIUDz0hQAbegGGXzv/l0AAAAASUVORK5CYII="/>
             </button>
+
+            <div id="sidebar" class="sidebar">
+                <div id="sessionArea">
+                    <button id="loginButton">Iniciar Sesión</button>
+                    <button id="registerButton">Registrarse</button>
+                </div>
+            </div>
+
+            <script>
+                const toggleButton = document.getElementById('toggleButton');
+                const sidebar = document.getElementById('sidebar');
+        
+                // Función para mostrar/ocultar la barra
+                toggleButton.addEventListener('click', () => {
+                    sidebar.classList.toggle('show');
+                });
+        
+                // Función para ocultar la barra si se hace clic fuera de ella
+                document.addEventListener('click', (event) => {
+                    const isClickInside = sidebar.contains(event.target) || toggleButton.contains(event.target);
+                    if (!isClickInside) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+            </script>
 
             <div id="logo">
                 <img src="../imgs/logo-st-tango2.png" alt="Producto 1">
