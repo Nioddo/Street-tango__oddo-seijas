@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inconsolata:wght@200..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
 :root{
     --blanco: #ffffff;
 }
@@ -14,7 +15,7 @@ header {
     height: 70px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: #ffffff49;
+    background-color: #ffffff77;
     display: flex; 
     align-items: center; 
     justify-content: space-between;
@@ -249,5 +250,87 @@ height: 10%;
 
 }
 .btn:hover {
-    background-color: #44444462;
+    background-color: #000000a1;
+}
+
+
+
+
+.catalogo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.producto {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.imagen-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.imagen-normal {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.imagen-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: none;
+}
+
+.imagen-container:hover .imagen-normal {
+    display: none;
+}
+
+.imagen-container:hover .imagen-hover {
+    display: block;
+}
+
+.producto h2 {
+    font-size: 24px;
+    margin: 15px 0 10px 0;
+    color: #333;
+}
+
+.producto .descripcion {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.producto .precio {
+    font-size: 20px;
+    color: #e67e22;
+    margin-bottom: 15px;
+}
+
+.comprar {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.comprar:hover {
+    background-color: #2ecc71;
 }
