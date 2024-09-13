@@ -363,6 +363,7 @@ height: 10%;
     }
     
     .producto h2 {
+        font-family: barlow;
         font-size: 2vw;
         color: #333;
         margin: 0;
@@ -370,6 +371,7 @@ height: 10%;
     
     
     .producto .descripcion {
+        font-family: barlow;
         font-size: 2vw;
         color: #777;
         margin: 0;

@@ -1,9 +1,26 @@
+<?php 
+    $servername = "127.0.0.1";
+    $database = "pagina_web_street_tango";
+    $username = "alumno";
+    $password = "alumnoipm";
+    
+    $conexion = mysqli_connect($servername, $username, $password, $database); // se crea la conexion
+
+    if (!$conexion) {
+        die("Conexion fallida: " . mysqli_connect_error());
+    }
+    else{
+        $query_check = "select * from productos order by fecha_de_entrada desc limit 3;";
+        $resultados= mysqli_query($conexion, $query_check);
+    
+    ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marca Urbana</title>
+    <title>Street Tango</title>
     <link rel="stylesheet" href="pagina_web_header_styles.css">
 </head>
 
@@ -144,53 +161,31 @@
     <h1 id="titulo-new-drops">New drops</h1>
     <div class="catalogo">
 
-        <div class="producto">
+<?php
+            
+            while($fila=mysqli_fetch_assoc($resultados)){ 
+                ?>
+            <div class="producto">
             <div class="imagen-container">
 
-                <img src="https://acdn.mitiendanube.com/stores/001/497/956/products/8-f64e9408a2acbd5dad17258334074051-1024-1024.webp" alt="Producto 1" class="imagen-normal">
+                <img src="<?php echo $fila['ruta_imagen_dorso']?>" alt="Producto 1" class="imagen-normal">
 
-                <img src="https://acdn.mitiendanube.com/stores/001/497/956/products/7-9f4c293f1401bc5aca17258334069651-1024-1024.webp" alt="Producto 1 hover" class="imagen-hover">
+                <img src="<?php echo $fila['ruta_imagen_reverso']?>" alt="Producto 1 hover" class="imagen-hover">
             </div>
-            <h2>Producto 2</h2>
+            <h2><?php echo $fila['nombre']?></h2>
 
-            <p class="descripcion">Otra descripción del producto.</p>
+            <p class="descripcion"><?php echo $fila['descripcion']?></p>
 
-            <p class="precio">$35.00</p>
+            <p class="precio">$<?php echo $fila['precio']?></p>
+
             <button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button>
+            </div>
 
+                <?php
+            }
+        }
+?>
         </div>
-            <div class="producto">
-                <div class="imagen-container">
-        
-                    <img src="https://acdn.mitiendanube.com/stores/001/497/956/products/1-c6124a31f902aeffc517258163877937-1024-1024.webp" alt="Producto 2" class="imagen-normal">
-        
-                    <img src="https://acdn.mitiendanube.com/stores/001/497/956/products/2-3fc33741afe2b8552a17258163871547-1024-1024.webp" alt="Producto 2 hover" class="imagen-hover">
-                </div>            
-                <h2>Producto 2</h2>
-        
-                <p class="descripcion">Otra descripción del producto.</p>
-        
-                <p class="precio">$35.00</p>
-        
-                <button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button>
-            </div>
-
-            <div class="producto">
-                <div class="imagen-container">
-        
-                    <img src="https://acdn.mitiendanube.com/stores/001/497/956/products/23-49ef3cba535618d6ef17227330424354-1024-1024.webp" alt="Producto 2" class="imagen-normal">
-        
-                    <img src="https://acdn.mitiendanube.com/stores/001/497/956/products/22-05b768235cd197eeb917227330418618-1024-1024.webp" alt="Producto 2 hover" class="imagen-hover">
-                </div>            
-                <h2>Producto 2</h2>
-        
-                <p class="descripcion">Otra descripción del producto.</p>
-        
-                <p class="precio">$35.00</p>
-        
-                <button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button>
-            </div>
-    </div>
 
     </main>
 
