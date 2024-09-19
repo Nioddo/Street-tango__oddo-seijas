@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="registro_styles.css">
+</head>
+<body>
+    <div id="register-container">
+        <img src="../imgs/logo-st-tango2.png" alt="Logo de st.tango" class="logo">
+        <h2>Registro</h2>
+        <form id="formulario_registro" action="registrarse.php" method="post">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="apellido" placeholder="Apellido" required>
+            <input type="email" name="email" placeholder="Correo Electrónico" required>
+            <input type="password" name="contraseña" placeholder="Contraseña" required minlength="8">
+            <input type="tel" name="telefono" placeholder="Teléfono" required>
+            <button type="submit">Registrar</button>
+        </form>
+    </div>
+</body>
+</html>
