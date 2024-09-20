@@ -271,9 +271,12 @@ height: 10%;
     width: 80vw;
     text-align: center;
     padding: 1vw;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+    transition: transform 0.8s ease;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
 }
-
+.producto:hover{
+    transform: scale(1.1);
+}
 
 
 
@@ -407,6 +410,8 @@ footer {
     font-size: 24px;
     font-family: 'Barlow';
     margin-bottom: 10px;
+    font-weight: 400;
+
   }
   
   .footer-content p {
