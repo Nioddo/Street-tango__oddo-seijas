@@ -1,4 +1,3 @@
-
 <?php 
     $servername = "127.0.0.1";
     $database = "pagina_web_street_tango";
@@ -11,41 +10,36 @@
         die("Conexion fallida: " . mysqli_connect_error());
     }
     else{
-        $query_check = "select * from productos;";
-        if(isset( $_GET["genero"])){
-        $query_check = "select * from productos where genero='".$_GET["genero"]."'"; 
-        }
+        $query_check = "select * from productos where productos_id=".$_GET['id'].";";
+        $talles="select descripcion from producto_talle pt join talle t on pt.talle_id = t.talle_id where pt.producto_id =".$_GET['id'].";";
         $resultados= mysqli_query($conexion, $query_check);
-    }
-
+        $talle= mysqli_query($conexion, $talles);
+    
     ?>
-
 
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All</title>
-    <link rel="stylesheet" href="catalogo_all_styles.css" type="text/css">
-    <link rel="shortcut icon" href="/imgs/logo-st-tango.png" type="image/x-icon">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producto</title>
+<link rel="stylesheet" href="producto.css" type="text/css">
+<link rel="shortcut icon" href="../imgs/logo-st-tango.png" type="image/x-icon">
 <body>
     <header>
         <div id="container">
-
+ 
             <button id="toggleButton" class="icon">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAExJREFUSEtjZKAxYKSx+QyjFhAM4QEJov8EnYVfAYqjsfmA5hZQ6AFU7QMSBzT3Ac3jgOYW0DyIhr4FNI8Dmlsw9ONg1AcoIUDz0hQAbegGGXzv/l0AAAAASUVORK5CYII="/>
             </button>
-
+ 
             <div id="sidebar" class="sidebar">
                 <div id="sessionArea">
                     <button id="loginButton">Iniciar Sesión</button>
                     <button id="registerButton">Registrarse</button>
                 </div>
             </div>
-
+ 
             <script>
                 const toggleButton = document.getElementById('toggleButton');
                 const sidebar = document.getElementById('sidebar');
@@ -61,63 +55,79 @@
                     if (!isClickInside) {
                         sidebar.classList.remove('show');
                     }
-                });
+                });s
             </script>
-
-<div id="logo">
-    <a href="/pagina/pagina_web_header.php" class="btn"><img src="/imgs/logo-st-tango2.png" alt="Producto 1"></a>
-</div>
-
+ 
+            <div id="logo">
+                <a href="/pagina/pagina_web_header.php" class="btn"><img src="/imgs/logo-st-tango2.png" alt="Producto 1"></a>
+            </div>
+ 
         
             <button class="icon">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/>
             </button>
     </header>
-    <h1 id="titulo-new-drops">Toda nuestra coleccion<?php         
-    if(isset( $_GET["genero"])){
-echo "para " .$_GET["genero"];
-}
-?>
-</h1>
-    <div class="filtro">
-    <button class="boton-filtro">Filtrar Catálogo</button>
-    <div class="filtros">
-        <a href="#">Opción 1</a>
-        <a href="#">Opción 2</a>
-        <a href="#">Opción 3</a>
-        <a href="#">Opción 4</a>
-    </div>
-</div>
+ 
     <main>
-        <div class="catalogo">
+        <section class="product-details">
 
-<?php
-            
+        <?php
             while($fila=mysqli_fetch_assoc($resultados)){ 
                 ?>
-            <div class="producto">
-            <div class="imagen-container">
 
-                <img src="<?php echo $fila['ruta_imagen_dorso']?>" alt="Producto 1" class="imagen-normal">
-
-                <img src="<?php echo $fila['ruta_imagen_reverso']?>" alt="Producto 1 hover" class="imagen-hover">
+            <div class="product-image">
+                <img src="<?php echo $fila['ruta_imagen_dorso']?>">
+                <img src="<?php echo $fila['ruta_imagen_reverso']?>" alt="Imagen alternativa del producto" class="hover-image">
             </div>
-            <h2><?php echo $fila['nombre']?></h2>
+            <div class="product-info">
+                <h2><?php echo $fila['nombre']?></h2>
+                <p class="price">$<?php echo $fila['precio']?></p>
+                <p class="description">
+                <?php echo $fila['descripcion']?>
+                </p>
 
-            <p class="descripcion"><?php echo $fila['descripcion']?></p>
+ 
 
-            <p class="precio">$<?php echo $fila['precio']?></p>
-
-            <button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button>
+                <form action="#" class="purchase-form">
+                    <label for="size">Tamaño:</label>
+                    <select id="size" name="size">
+                    <?php
+            while($fila1=mysqli_fetch_assoc($talle)){ 
+                $talles = $talles . "- ".  $fila1['descripcion'];
+                ?>
+                        <option value="small"><?php echo $fila1['descripcion']?></option>
+                        <?php
+            }?>
+                    </select>
+                    <label for="color">Color:</label>
+                    <select id="color" name="color">
+                        <option value="black">Negro</option>
+                        <option value="white">Blanco</option>
+                    </select>
+                    <button type="submit" class="buy-btn">Comprar</button>
+                </form>
             </div>
 
-                <?php
-            }
+
+        </section>
+
+        <section class="product-specs">
+            <h3>Especificaciones: </h3>
+            <ul>
+                <li>Descripcion: <?php echo $fila['descripcion_larga']?></li>
+                <li>Colores disponibles: Negro, Blanco</li>
+                <li>Talles: <?php echo $talles?></li>
+                <li>Corte: <?php echo $fila['genero']?></li>
+            </ul>
+        </section>
+        <?php
+            
+        }
+    }
 ?>
-        </div>
-        </div>
-    
+
     </main>
+
     <footer>
         <div class="footer-content">
         <h3>Street Tango</h3>
@@ -144,4 +154,3 @@ echo "para " .$_GET["genero"];
         </div>
     </footer>
 </body>
-</html>

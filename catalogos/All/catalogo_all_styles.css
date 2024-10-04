@@ -110,11 +110,26 @@ main {
     margin-top: 80px;
 }
 
-#titulo-new-drops {
-    font-family: "Barlow";
-    margin-top: 14vw;
+#titulo-new-drops{
+    font-family: barlow;
+    display: flex;
+    margin-top: 40vw;
     text-align: center;
-    font-weight: 100;
+    font-size: 8vw;
+    font-weight: 5;
+    justify-content: center;
+
+}
+@media(min-width: 550px){
+    #titulo-new-drops {
+        font-family: barlow;
+        display: flex;
+        margin-top: 15vw;
+        text-align: center;
+        font-size: 8vw;
+        font-weight: 5;
+        justify-content: center;
+    }    
 }
 .filtro {
     display: flex;

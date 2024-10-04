@@ -153,14 +153,15 @@ header:hover{
     align-items: center;
     text-align: -webkit-center;
     font-family: Barlow;
+    padding: 5vw;
 }
 
 .info-icons h3{
-    font-weight: 300;
+    font-weight: 200;
     font-size: 4vw;
 }
 .info-icons h2 {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 4vw;
 }
 @media(min-width: 550px){
@@ -171,11 +172,11 @@ header:hover{
         align-items: flex-start;
     }
     .info-icons h3{
-        font-weight: 300;
+        font-weight: 200;
         font-size: 2vw;
     }
     .info-icons h2 {
-        font-weight: 400;
+        font-weight: 500;
         font-size: 2vw;
     }
 

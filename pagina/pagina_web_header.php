@@ -155,14 +155,14 @@
             <img src="../imgs/hombre.jpg" alt="Remeras">
             <div class="overlay">
                 <h2>FOR HIM</h2>
-                <a href="../catalogos/For him/catalogo_him_index.html" class="btn">VER MÁS</a>
+                <a href="../catalogos/All/catalogo_all_index.php?genero=Hombre" class="btn">VER MÁS</a>
             </div>
         </div>
         <div class="box">
             <img src="../imgs/mujer.jpg" alt="For Her">
             <div class="overlay">
                 <h2>FOR HER</h2>
-                <a href="../catalogos/For her/catalogo_her_index.html" class="btn">VER MÁS</a>
+                <a href="../catalogos/All/catalogo_all_index.php?genero=Mujer" class="btn">VER MÁS</a>
             </div>
         </div>
         <div class="box">
@@ -193,7 +193,7 @@
 
             <p class="precio">$<?php echo $fila['precio']?></p>
 
-            <button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button>
+            <a href="../producto/producto.php?id=<?php echo $fila['productos_id'] ?>"><button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button></a>
             </div>
 
                 <?php
@@ -209,7 +209,7 @@
         <h3>Street Tango</h3>
 <ul class="politics">
 <li><a href="#">Como comprar</a></li>
-<li><a href="#">Politica de devolucion</a></li>
+<li><a href="../politica_de_devolucion/politica_devolucion.html">Politica de devolucion</a></li>
 
 </ul>
         <ul class="socials">
