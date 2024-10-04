@@ -209,7 +209,7 @@
         <h3>Street Tango</h3>
 <ul class="politics">
 <li><a href="#">Como comprar</a></li>
-<li><a href="../politica_de_devolucion/politica_devolucion.html">Politica de devolucion</a></li>
+<li><a href="/politica_de_devolucion/politica_devolucion.html">Politica de devolucion</a></li>
 
 </ul>
         <ul class="socials">

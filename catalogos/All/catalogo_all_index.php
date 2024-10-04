@@ -11,10 +11,19 @@
         die("Conexion fallida: " . mysqli_connect_error());
     }
     else{
-        $query_check = "select * from productos;";
+        $query_check = "select * from productos ";
         if(isset( $_GET["genero"])){
-        $query_check = "select * from productos where genero='".$_GET["genero"]."'"; 
-        }
+        $query_check = $query_check.  "where genero='".$_GET["genero"]."'"; 
+        } 
+        if(!isset( $_GET["genero"]) and isset($_GET["filtro"])) {
+            $query_check = $query_check . "where categoria_id=".$_GET["filtro"].""; 
+        } 
+        if(isset( $_GET["genero"]) and isset($_GET["filtro"])) {
+            $query_check = $query_check . "and categoria_id=".$_GET["filtro"].""; 
+        } 
+        if(isset($_GET["precio"]) ) {
+            $query_check = $query_check . " order by precio ".$_GET["precio"].""; 
+        } 
         $resultados= mysqli_query($conexion, $query_check);
     }
 
@@ -82,11 +91,29 @@ echo "para " .$_GET["genero"];
     <div class="filtro">
     <button class="boton-filtro">Filtrar Catálogo</button>
     <div class="filtros">
-        <a href="#">Opción 1</a>
-        <a href="#">Opción 2</a>
-        <a href="#">Opción 3</a>
-        <a href="#">Opción 4</a>
-    </div>
+        <a href="?<?php if(isset($_GET["genero"])) {
+    echo "genero=";
+    echo $_GET["genero"]."&";
+} ?>filtro=1">Pantalones</a>
+        <a href="?<?php if(isset($_GET["genero"])) {
+    echo "genero=";
+    echo $_GET["genero"]."&";
+} ?>filtro=2">Buzos</a>
+        <a href="?<?php if(isset($_GET["genero"])) {
+    echo "genero=";
+    echo $_GET["genero"]."&";
+} ?>filtro=4">Remeras</a>       
+
+<a href="?<?php if(isset($_GET["genero"])) {
+    echo "genero=";
+    echo $_GET["genero"]."&";
+} ?>precio=desc">Mas caros</a>
+
+<a href="?<?php if(isset($_GET["genero"])) {
+    echo "genero=";
+    echo $_GET["genero"]."&";
+} ?>precio=asc">Mas baratos</a>   
+</div>
 </div>
     <main>
         <div class="catalogo">
@@ -108,7 +135,7 @@ echo "para " .$_GET["genero"];
 
             <p class="precio">$<?php echo $fila['precio']?></p>
 
-            <button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button>
+            <a href="../../producto/producto.php?id=<?php echo $fila['productos_id'] ?>"><button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button></a>
             </div>
 
                 <?php

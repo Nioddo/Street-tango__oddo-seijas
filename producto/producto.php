@@ -11,9 +11,14 @@
     }
     else{
         $query_check = "select * from productos where productos_id=".$_GET['id'].";";
-        $talles="select descripcion from producto_talle pt join talle t on pt.talle_id = t.talle_id where pt.producto_id =".$_GET['id'].";";
+        $consulta_talles="select descripcion from producto_talle pt join talle t on pt.talle_id = t.talle_id where pt.producto_id =".$_GET['id'].";";
+        $consulta_color = "select descripcion from producto_color pc join color c on pc.color_id = c.color_id where pc.productos_id =" . $_GET['id'] . ";";
         $resultados= mysqli_query($conexion, $query_check);
-        $talle= mysqli_query($conexion, $talles);
+        $resultado_talles= mysqli_query($conexion, $consulta_talles);
+        $resultado_color= mysqli_query($conexion, $consulta_color);
+        $string_talles = "";
+        $string_color = "";
+
     
     ?>
 
@@ -92,8 +97,8 @@
                     <label for="size">Tamaño:</label>
                     <select id="size" name="size">
                     <?php
-            while($fila1=mysqli_fetch_assoc($talle)){ 
-                $talles = $talles . "- ".  $fila1['descripcion'];
+            while($fila1=mysqli_fetch_assoc($resultado_talles)){ 
+                $string_talles = $string_talles.  $fila1['descripcion']. ", ";
                 ?>
                         <option value="small"><?php echo $fila1['descripcion']?></option>
                         <?php
@@ -101,8 +106,13 @@
                     </select>
                     <label for="color">Color:</label>
                     <select id="color" name="color">
-                        <option value="black">Negro</option>
-                        <option value="white">Blanco</option>
+                    <?php
+            while($fila2=mysqli_fetch_assoc($resultado_color)){ 
+                $string_color = $string_color.  $fila2['descripcion']. ", ";
+                ?>
+                        <option value="small"><?php echo $fila2['descripcion']?></option>
+                        <?php
+            }?>
                     </select>
                     <button type="submit" class="buy-btn">Comprar</button>
                 </form>
@@ -115,9 +125,10 @@
             <h3>Especificaciones: </h3>
             <ul>
                 <li>Descripcion: <?php echo $fila['descripcion_larga']?></li>
-                <li>Colores disponibles: Negro, Blanco</li>
-                <li>Talles: <?php echo $talles?></li>
+                <li>Colores disponibles: <?php echo $string_color ?></li>
+                <li>Talles: <?php echo $string_talles ?></li>
                 <li>Corte: <?php echo $fila['genero']?></li>
+                <li>Marca: <?php echo $fila['marca']?></li>
             </ul>
         </section>
         <?php
@@ -133,7 +144,7 @@
         <h3>Street Tango</h3>
 <ul class="politics">
 <li><a href="#">Como comprar</a></li>
-<li><a href="../politica_de_devolucion/politica_devolucion.html">Politica de devolucion</a></li>
+<li><a href="/politica_de_devolucion/politica_devolucion.html">Politica de devolucion</a></li>
 
 </ul>
         <ul class="socials">
