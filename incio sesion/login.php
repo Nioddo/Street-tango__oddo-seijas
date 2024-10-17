@@ -1,6 +1,6 @@
 <?php 
 	$nombre= $_POST["mail"];
-    $contraseña = $_POST["contraseña"];
+    $contraseña = $_POST["password"];
 
 
     $servername = "127.0.0.1";
@@ -15,15 +15,18 @@
     }
     else{
         // Verificar si el correo ya existe
-        $query_check = "select contraseña from users where mail = '$mail';";
+        $query_check = "select contraseña from users where mail = '$nombre';";
         $resultado_check = mysqli_query($conexion, $query_check);
         $fila=mysqli_fetch_assoc($resultado_check);
         if (mysqli_num_rows($resultado_check) < 1) {
             echo "No hay una cuenta asociada a ese usuario";
         } 
         else {
-            if ($fila["contraseña"==$contraseña]) {
-                echo "inicio exitoso.";
+            if ($fila["contraseña"]==$contraseña) {
+                session_start();
+                $_SESSION["iniciada"] = true;
+                $_SESSION["mail"] = $nombre;
+                header("Location: ../pagina/pagina_web_header.php");
             } else {
                 echo "Error al registrar: " . mysqli_error($conexion);
             }

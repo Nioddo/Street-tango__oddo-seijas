@@ -1,4 +1,9 @@
 <?php 
+    session_start();
+    $logeado = false;
+    if(isset($_SESSION["iniciada"]) && $_SESSION["iniciada"]){
+        $logeado=true;
+    }
     $servername = "127.0.0.1";
     $database = "pagina_web_street_tango";
     $username = "alumno";
@@ -50,10 +55,31 @@
             </button>
 
             <div id="sidebar" class="sidebar">
-                <div id="sessionArea">
+                <?php 
+                if($logeado==true)
+                {
+                    ?>
+                    <div id="sessionArea">
+                    <button id="loginButton">Cerrar sesion</button>
+
+                </div>
+                
+                <?php 
+
+                }
+                else{
+                    ?>
+                    <div id="sessionArea">
                     <button id="loginButton">Iniciar Sesión</button>
                     <button id="registerButton">Registrarse</button>
                 </div>
+                
+                <?php 
+
+
+                }
+                ?>
+
             </div>
 
             <script>
