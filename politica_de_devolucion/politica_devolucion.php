@@ -1,4 +1,3 @@
-
 <?php 
     session_start();
     $logeado = false;
@@ -15,25 +14,8 @@
     if (!$conexion) {
         die("Conexion fallida: " . mysqli_connect_error());
     }
-    else{
-        $query_check = "select * from productos ";
-        if(isset( $_GET["genero"])){
-        $query_check = $query_check.  "where genero='".$_GET["genero"]."'"; 
-        } 
-        if(!isset( $_GET["genero"]) and isset($_GET["filtro"])) {
-            $query_check = $query_check . "where categoria_id=".$_GET["filtro"].""; 
-        } 
-        if(isset( $_GET["genero"]) and isset($_GET["filtro"])) {
-            $query_check = $query_check . "and categoria_id=".$_GET["filtro"].""; 
-        } 
-        if(isset($_GET["precio"]) ) {
-            $query_check = $query_check . " order by precio ".$_GET["precio"].""; 
-        } 
-        $resultados= mysqli_query($conexion, $query_check);
-    }
 
     ?>
-
 
 
 <!DOCTYPE html>
@@ -41,25 +23,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All</title>
-    <link rel="stylesheet" href="catalogo_all_styles.css" type="text/css">
+    <title>For him</title>
+    <link rel="stylesheet" href="politica_devolucion.css" type="text/css">
     <link rel="shortcut icon" href="/imgs/logo-st-tango.png" type="image/x-icon">
 </head>
 <body>
     <header>
         <div id="container">
-
+ 
             <button id="toggleButton" class="icon">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAExJREFUSEtjZKAxYKSx+QyjFhAM4QEJov8EnYVfAYqjsfmA5hZQ6AFU7QMSBzT3Ac3jgOYW0DyIhr4FNI8Dmlsw9ONg1AcoIUDz0hQAbegGGXzv/l0AAAAASUVORK5CYII="/>
             </button>
-
+ 
             <div id="sidebar" class="sidebar">
                 <div id="sessionArea">
                     <button id="loginButton">Iniciar Sesión</button>
                     <button id="registerButton">Registrarse</button>
                 </div>
             </div>
-
+ 
             <script>
                 const toggleButton = document.getElementById('toggleButton');
                 const sidebar = document.getElementById('sidebar');
@@ -77,78 +59,47 @@
                     }
                 });
             </script>
-
-<div id="logo">
-    <a href="/pagina/pagina_web_header.php" class="btn"><img src="/imgs/logo-st-tango2.png" alt="Producto 1"></a>
-</div>
-
+ 
+            <div id="logo">
+                <a href="/pagina/pagina_web_header.php" class="btn"><img src="../imgs/logo-st-tango2.png" alt="Producto 1"></a>
+            </div>
+ 
         
             <button class="icon">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/>
             </button>
     </header>
-    <h1 id="titulo-new-drops">Toda nuestra coleccion<?php         
-    if(isset( $_GET["genero"])){
-echo "para " .$_GET["genero"];
-}
-?>
-</h1>
-    <div class="filtro">
-    <button class="boton-filtro">Filtrar Catálogo</button>
-    <div class="filtros">
-        <a href="?<?php if(isset($_GET["genero"])) {
-    echo "genero=";
-    echo $_GET["genero"]."&";
-} ?>filtro=1">Pantalones</a>
-        <a href="?<?php if(isset($_GET["genero"])) {
-    echo "genero=";
-    echo $_GET["genero"]."&";
-} ?>filtro=2">Buzos</a>
-        <a href="?<?php if(isset($_GET["genero"])) {
-    echo "genero=";
-    echo $_GET["genero"]."&";
-} ?>filtro=4">Remeras</a>       
-
-<a href="?<?php if(isset($_GET["genero"])) {
-    echo "genero=";
-    echo $_GET["genero"]."&";
-} ?>precio=desc">Mas caros</a>
-
-<a href="?<?php if(isset($_GET["genero"])) {
-    echo "genero=";
-    echo $_GET["genero"]."&";
-} ?>precio=asc">Mas baratos</a>   
-</div>
-</div>
+ 
     <main>
-        <div class="catalogo">
-
-<?php
-            
-            while($fila=mysqli_fetch_assoc($resultados)){ 
-                ?>
-            <div class="producto">
-            <div class="imagen-container">
-
-                <img src="<?php echo $fila['ruta_imagen_dorso']?>" alt="Producto 1" class="imagen-normal">
-
-                <img src="<?php echo $fila['ruta_imagen_reverso']?>" alt="Producto 1 hover" class="imagen-hover">
-            </div>
-            <h2><?php echo $fila['nombre']?></h2>
-
-            <p class="descripcion"><?php echo $fila['descripcion']?></p>
-
-            <p class="precio">$<?php echo $fila['precio']?></p>
-
-            <a href="../../producto/producto.php?id=<?php echo $fila['productos_id'] ?>"><button class="comprar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAORJREFUSEvtld0RATEUhb+twKiATtCBDujAqAAdKEEHlEAlRgc6YI5JdshKbnZNxsvmZTP5Od/Nyd3cisKtKqxPLmAOrICpC+gM7AB9ky0HcAAWERVBtimCBVDkRyewBk6uvwQ2rj9LncQCyIIJIPF9EKkiF+TyZl3jMBbg4XYMgXuwewxc3VhUJxcQW+cDyAZ4S6zkSM1LQ/fyaiHZR/QL4EM3BvDjlgXhfGP93wFtrWp9gh4QTVPrB4xZ19+BmVSmRXoxB6ZMesEN0Ev79S1SSVQFG3WESFzFqC6lXbMlm18c8ATvMDIZGBnHqwAAAABJRU5ErkJggg=="/></button></a>
-            </div>
-
-                <?php
-            }
-?>
-        </div>
-        </div>
+        <div class="container">
+            <h1>Política de Devolución</h1>
+            <p id="actualizacion">Última actualización: 21/09/24</p>
     
+            <p id="subtitle">En Tango Street, queremos que estés completamente satisfecho con tu compra. Si no estás feliz con tu producto, tenemos una política de devoluciones flexible para asegurarnos de que tu experiencia sea la mejor posible.</p>
+    
+            <h2>Plazo para Devoluciones</h2>
+            <ul>
+                <li><strong>Compras en línea:</strong> Puedes devolver cualquier artículo en un plazo de 30 días desde la fecha de recepción.</li>
+                <li><strong>Compras presenciales:</strong> Las devoluciones deben realizarse dentro de los 30 días desde la fecha de compra.</li>
+            </ul>
+    
+            <h2>Condiciones para la Devolución</h2>
+            <p>Para que un artículo sea elegible para devolución, debe cumplir con las siguientes condiciones:</p>
+            <ul>
+                <li>Estar en su estado original, sin uso, sin lavar y con todas las etiquetas adjuntas.</li>
+                <li>No debe haber sufrido daños por uso indebido.</li>
+            </ul>
+    
+            <h2>Proceso de Devolución</h2>
+            <ol>
+                <li>Lleva el artículo junto con el recibo de compra a cualquier tienda de Tango street.</li>
+                <li>Nuestro equipo te ayudará con el proceso de devolución.</li>
+            </ol>
+            <h2>Cambios</h2>
+            <p>Si deseas cambiar un artículo, te recomendamos realizar una devolución y hacer un nuevo pedido. Esto garantiza que puedas recibir el tamaño o color deseado lo más rápido posible.</p>
+            <h2>Atención al Cliente</h2>
+            <p>Si tienes alguna pregunta o inquietud sobre nuestra política de devoluciones, no dudes en ponerte en contacto con nuestro equipo de atención al cliente en TangoStreet@gmail.com o 11 1234-5678.</p>
+        </div>
     </main>
     <footer>
         <div class="footer-content">

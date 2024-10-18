@@ -5,7 +5,9 @@
     margin: 0;
     padding: 0 ;
 }
-
+#reserva{
+  display: none;
+}
 :root{
     --blanco: #ffffff;
 }
@@ -204,6 +206,16 @@ main {
   font-weight: 700;
   margin-bottom: 20px;
 
+
+}
+.purchase-form input {
+  padding: 6px;
+  font-family: 'Bitter';
+  border-radius: 5px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background-color: #e9e5e5;
+  border: 1.5px solid gray;
 
 }
 

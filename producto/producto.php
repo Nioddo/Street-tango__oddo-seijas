@@ -1,4 +1,9 @@
 <?php 
+    session_start();
+    $logeado = false;
+    if(isset($_SESSION["iniciada"]) && $_SESSION["iniciada"]){
+        $logeado=true;
+    }
     $servername = "127.0.0.1";
     $database = "pagina_web_street_tango";
     $username = "alumno";
@@ -60,7 +65,7 @@
                     if (!isClickInside) {
                         sidebar.classList.remove('show');
                     }
-                });s
+                });
             </script>
  
             <div id="logo">
@@ -77,7 +82,8 @@
         <section class="product-details">
 
         <?php
-            while($fila=mysqli_fetch_assoc($resultados)){ 
+        $fila=mysqli_fetch_assoc($resultados);
+            $stock=$fila["stock"];
                 ?>
 
             <div class="product-image">
@@ -92,15 +98,15 @@
                 </p>
 
  
-
-                <form action="#" class="purchase-form">
+<div id="producto">
+                <form action="../compra/compra.php" class="purchase-form" method="get">
                     <label for="size">Tamaño:</label>
                     <select id="size" name="size">
                     <?php
             while($fila1=mysqli_fetch_assoc($resultado_talles)){ 
                 $string_talles = $string_talles.  $fila1['descripcion']. ", ";
                 ?>
-                        <option value="small"><?php echo $fila1['descripcion']?></option>
+                        <option value="<?php echo $fila1['descripcion']?>"><?php echo $fila1['descripcion']?></option>
                         <?php
             }?>
                     </select>
@@ -110,16 +116,64 @@
             while($fila2=mysqli_fetch_assoc($resultado_color)){ 
                 $string_color = $string_color.  $fila2['descripcion']. ", ";
                 ?>
-                        <option value="small"><?php echo $fila2['descripcion']?></option>
+                        <option value="<?php echo $fila2['descripcion']?>"><?php echo $fila2['descripcion']?></option>
                         <?php
             }?>
-                    </select>
-                    <button type="submit" class="buy-btn">Comprar</button>
-                </form>
             </div>
+                    </select>
+
+        <label for="cantidad" id="labelCantidad">Cantidad:</label>
+        <input type="number" name="cdt" id="cantidad" value="1" min="1" max="<?php echo $stock ?>" />
+
+            <button type="submit" class="buy-btn" id="btnMostrarSeccion1">Comprar</button>
+                </form>
 
 
+                <form id="reserva" method="GET" class="reservation-form" action="cdt=<?php echo $cdt?>&color=<?php echo $color ?>&talle=<?php echo $size ?>">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+    
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+    
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" name="dni" required>
+    
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="fecha">Selecciona una fecha:</label>
+                <select id="fecha" name="fecha" required>
+                    <option value="">Seleccione una fecha</option>
+                    <option value="2024-10-25">25 de Octubre 2024</option>
+                    <option value="2024-10-26">26 de Octubre 2024</option>
+                    <option value="2024-10-27">27 de Octubre 2024</option>
+                </select>
+    
+                <label for="lugar">Selecciona un lugar de retiro:</label>
+                <select id="lugar" name="lugar" required>
+                    <option value="">Seleccione un lugar</option>
+                    <option value="lugar1">Sucursal Centro</option>
+                    <option value="lugar2">Sucursal Norte</option>
+                    <option value="lugar3">Sucursal Sur</option>
+                    <option value="lugar4">Sucursal Este</option>
+                </select>
+    
+                <button type="submit">Reservar</button>
+            </form>
+            </div>
         </section>
+
+        <script>
+        document.getElementById('btnMostrarSeccion2').addEventListener('click', function() {
+            document.getElementById('producto').style.display = 'none'; // Ocultar sección 1
+            document.getElementById('reserva').style.display = 'block'; // Mostrar sección 2
+        });
+
+    </script>
 
         <section class="product-specs">
             <h3>Especificaciones: </h3>
@@ -134,7 +188,7 @@
         <?php
             
         }
-    }
+    
 ?>
 
     </main>

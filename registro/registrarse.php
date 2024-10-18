@@ -30,6 +30,8 @@
 
         if ($resultado_insert) {
             echo "Registro exitoso.";
+            header("Location: ../pagina/pagina_web_header.php");
+
         } else {
             echo "Error al registrar: " . mysqli_error($conexion);
         }

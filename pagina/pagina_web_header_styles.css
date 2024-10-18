@@ -95,7 +95,51 @@ header:hover{
         box-shadow: 0px 0px 10px rgba(10, 10, 10, 0.822);
 
 }
+#sessionlogeada{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 5px;
+}
+#sessionlogeada h5{
+    margin: 0;
+    font-size: 15px;
+    font-family: 'Barlow';
+    font-weight: 600;
+}
+#acount{
+    display: flex;
 
+
+}
+#imgcount{
+    width: 5vw;
+}
+#imgcount img{
+    width: 100%;
+}
+.cierresesion{
+    text-decoration: none;
+    text-decoration: none;
+  font-family: 'Barlow';
+  color: black; 
+}
+#sessionArea{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 5px;
+}
+.botoncuentas{
+    text-decoration: none;
+    text-decoration: none;
+  font-family: 'Barlow';
+  color: black;
+
+
+}
 .sidebar.show {
     left: 0; }
 
