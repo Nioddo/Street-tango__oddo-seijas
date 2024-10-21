@@ -89,7 +89,7 @@
                 </div>
             </div>
             
-            <form method="GET" class="reservation-form" action="reserva.php?cdt=<?php echo $cdt?>&color=<?php echo $color ?>&talle=<?php echo $size ?>">
+            <form method="GET" class="reservation-form" a
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
     

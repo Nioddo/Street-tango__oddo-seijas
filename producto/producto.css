@@ -1,18 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inconsolata:wght@200..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
-*{
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@100..900&display=swap');
+
+* {
     margin: 0;
-    padding: 0 ;
+    padding: 0;
 }
-#reserva{
-  display: none;
-}
-:root{
+
+:root {
     --blanco: #ffffff;
 }
- 
-body{
+
+body {
     margin: 0;
 }
 
@@ -20,352 +18,159 @@ header {
     position: fixed;
     width: 100%;
     height: 70px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     background-color: #ffffff77;
     box-shadow: 0px 0px 10px rgba(10, 10, 10, 0.822);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: 0.3s;
-    z-index: 1000000000000000000000;
-    top: 0;
- 
-}
- 
-header:hover{
-    background-color: var(--blanco);
-    box-shadow: 0px 0px 10px rgba(10, 10, 10, 0.932);
- 
+    z-index: 1000;
 }
 
-#container {
-    width: 100vw;
-    display: flex;
-    justify-content: space-between;
- 
-}
- 
-.icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 9%;
-    max-width: 50px;
-}
- 
-#logo {
-    width: 75px;
-}
- 
-#logo img{
-    width: 100%;
-}
-.sidebar {
-        position: fixed;
-        top: 0;
-        left: -3350px;
-        width: 20%;
-        height: 100%;
-        background-color: #ffffff;
-        color: rgb(0, 0, 0);
-        padding: 1vw;
-        transition: left 0.6s ease;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(10, 10, 10, 0.822);
- 
-}
- 
-.sidebar.show {
-    left: 0; 
-}
- 
-#slider-frame {
-    overflow: hidden;
-}
- 
-#slider-frame ul {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    transition: transform 0.5s ease-in-out;
-}
- 
-#slider-frame li {
-    min-width: 100%;
-    box-sizing: border-box;
-}
- 
-#slider-frame img {
-    width: 100%;
-    height: 80vh;
-    object-fit: cover;
-}
- 
-.active {
-    display: block;
-}
- 
 main {
-  max-width: 1200px;
-  margin: 4% auto;
-  padding: 0px 20px;
-}
-@media(min-width: 950px){
-  main {
     max-width: 1200px;
-    margin: 0% auto;
-    padding: 0px 20px;
-  }
-  
-}
-.product-details {
-  display: flex;
-  margin-bottom: 40px;
-  flex-direction: column;
-  align-items: center;
+    margin: 4% auto;
+    padding: 0 20px;
 }
 
-@media(min-width: 550px){
-  .product-details {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0px;
-  flex-direction: row;
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
 }
+
+@media(min-width: 550px) {
+    .product-details {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 0;
+    }
 }
+
 .product-image {
-  position: relative;
-  max-width: 500px;
-  width: 100%;
+    max-width: 500px;
+    width: 100%;
 }
 
 .product-image img {
-  width: 100%;
-  border-radius: 10px;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.product-image .hover-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.product-image:hover .hover-image {
-  opacity: 1;
-}
-
-.product-image:hover .default-image {
-  opacity: 0;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .product-info {
-  max-width: 500px;
-  width: 100%;
-  padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
 }
 
 .product-info h2 {
-  font-family: 'Barlow';
-  font-weight: 500;
-  font-size: 2em;
-  margin-bottom: 10px;
+    font-family: 'Barlow';
+    font-size: 2em;
+    margin-bottom: 10px;
 }
 
 .price {
-  font-size: 1.5em;
-  color: #807f7f;
-  font-family: 'Bitter';
-  font-weight: 400;
-  margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #807f7f;
+    font-family: 'Bitter';
+    margin-bottom: 20px;
 }
 
 .description {
-  margin-bottom: 20px;
-  font-family: 'Barlow';
+    margin-bottom: 20px;
+    font-family: 'Barlow';
 }
 
-.purchase-form {
-  display: flex;
-  flex-direction: column;
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.purchase-form label {
-  font-family: 'Barlow';
-  margin: 10px 0 5px;}
-
-.purchase-form select {
-  padding: 6px;
-  font-family: 'Bitter';
-  border-radius: 5px;
-  font-weight: 700;
-  margin-bottom: 20px;
-
-
-}
-.purchase-form input {
-  padding: 6px;
-  font-family: 'Bitter';
-  border-radius: 5px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  background-color: #e9e5e5;
-  border: 1.5px solid gray;
-
+.form label {
+    font-family: 'Barlow';
+    margin: 10px 0 5px;
 }
 
-.buy-btn {
-  background-color: #919191;
-  color: white;
-  border-radius: 10px;
-  padding: 1vw;
-  border: none;
-  font-family: 'Barlow';
-  font-weight: 400;
-  cursor: pointer;
-  font-size: 1.2em;
+.form select,
+.form input {
+    padding: 6px;
+    font-family: 'Bitter';
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1.5px solid gray;
 }
 
-.buy-btn:hover {
-  background-color: #777777;
+.form input {
+    background-color: #e9e5e5;
+}
+
+.button {
+    background-color: #919191;
+    color: white;
+    border-radius: 10px;
+    padding: 1vw;
+    border: none;
+    font-family: 'Barlow';
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.button:hover {
+    background-color: #777777;
+}
+
+#reserva {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#reserva label {
+    font-family: 'Barlow';
+}
+
+#reserva input,
+#reserva select {
+    padding: 8px;
+    font-family: 'Bitter';
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1.5px solid gray;
 }
 
 .product-specs h3 {
-  font-size: 1.5em;
-  font-family: 'Barlow';
-  font-weight: 300;
-  margin-bottom: 15px;
+    font-size: 1.5em;
+    font-family: 'Barlow';
+    margin-bottom: 15px;
 }
 
 .product-specs ul {
-  list-style-type: none;
-  padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 .product-specs ul li {
-  padding: 5px 0;
+    padding: 5px 0;
     font-family: 'Barlow';
-    font-weight: 200;
 }
 
 footer {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  padding: 30px 0;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 30px 0;
 }
 
 .footer-content h3 {
-  font-size: 24px;
-  font-family: 'Barlow';
-  margin-bottom: 10px;
-  font-weight: 400;
-  text-align: center;
-
-}
-
-.footer-content p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-.politics{
-  list-style: none;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-}
-.politics a{
-  text-decoration: none;
-  font-family: Barlow;
-  color: #333;
-}
-.socials {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  gap: 0.3vw;
-  font-family: Barlow;
-  flex-direction: column;
-  align-items: center;
-}
-
-.socials li {
-  margin: 0 10px;
-}
-.socials img{
-width: 5vw;
-}
-.socials a {
-  color: rgb(0, 0, 0);
-  font-size: 5.5vw;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-@media(min-width: 450px){
-  .socials img{
-      width: 3vw;
-      }
-      .socials a {
-        color: rgb(0, 0, 0);
-        font-size: 2.5vw;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-      }
-      .politics {
-          list-style: none;
-          display: flex;
-          align-items: center;
-          align-content: center;
-          flex-wrap: wrap;
-          justify-content: space-around;
-      }
-  
-}
-@media(min-width: 700px){
-  .socials img{
-      width: 2vw;
-      }
-  .socials a {
-      color: rgb(0, 0, 0);
-      font-size: 1.5vw;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
-    .politics {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      align-content: center;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-  }
-    
+    font-size: 24px;
+    font-family: 'Barlow';
+    margin-bottom: 10px;
 }
 
 .footer-bottom {
-  background-color: #d9d9d9;
-  padding: 20px 0;
-  margin-top: 20px;
-}
-
-.footer-bottom p {
-  font-size: 14px;
-  font-family: 'Bitter';
-  text-align: center;
-}
-
-.footer-bottom span {
-  color: #ff9900;
+    background-color: #d9d9d9;
+    padding: 20px 0;
+    margin-top: 20px;
 }

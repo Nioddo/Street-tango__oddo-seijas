@@ -23,7 +23,7 @@
         $resultado_color= mysqli_query($conexion, $consulta_color);
         $string_talles = "";
         $string_color = "";
-
+    }
     
     ?>
 
@@ -79,119 +79,124 @@
     </header>
  
     <main>
-        <section class="product-details">
-
+    <section class="product-details">
         <?php
-        $fila=mysqli_fetch_assoc($resultados);
-            $stock=$fila["stock"];
-                ?>
-
+        if ($resultados && mysqli_num_rows($resultados) > 0) {
+            $fila = mysqli_fetch_assoc($resultados);
+            $stock = $fila["stock"];
+            $string_talles = '';
+            $string_color = '';
+        ?>
             <div class="product-image">
-                <img src="<?php echo $fila['ruta_imagen_dorso']?>">
-                <img src="<?php echo $fila['ruta_imagen_reverso']?>" alt="Imagen alternativa del producto" class="hover-image">
+                <img src="<?php echo htmlspecialchars($fila['ruta_imagen_dorso']); ?>">
+                <img src="<?php echo htmlspecialchars($fila['ruta_imagen_reverso']); ?>" alt="Imagen alternativa del producto" class="hover-image">
             </div>
             <div class="product-info">
-                <h2><?php echo $fila['nombre']?></h2>
-                <p class="price">$<?php echo $fila['precio']?></p>
-                <p class="description">
-                <?php echo $fila['descripcion']?>
-                </p>
+                <h2><?php echo htmlspecialchars($fila['nombre']); ?></h2>
+                <p class="price">$<?php echo htmlspecialchars($fila['precio']); ?></p>
+                <p class="description"><?php echo htmlspecialchars($fila['descripcion']); ?></p>
 
- 
-<div id="producto">
-                <form action="../compra/compra.php" class="purchase-form" method="get">
-                    <label for="size">Tamaño:</label>
-                    <select id="size" name="size">
-                    <?php
-            while($fila1=mysqli_fetch_assoc($resultado_talles)){ 
-                $string_talles = $string_talles.  $fila1['descripcion']. ", ";
-                ?>
-                        <option value="<?php echo $fila1['descripcion']?>"><?php echo $fila1['descripcion']?></option>
-                        <?php
-            }?>
-                    </select>
-                    <label for="color">Color:</label>
-                    <select id="color" name="color">
-                    <?php
-            while($fila2=mysqli_fetch_assoc($resultado_color)){ 
-                $string_color = $string_color.  $fila2['descripcion']. ", ";
-                ?>
-                        <option value="<?php echo $fila2['descripcion']?>"><?php echo $fila2['descripcion']?></option>
-                        <?php
-            }?>
+                <div id="producto">
+                    <form action="../compra/compra.php" class="form purchase-form" method="get" onsubmit="return showReservationForm(event);">
+                        <label for="size">Tamaño:</label>
+                        <select id="size" name="size">
+                            <?php
+                            while ($fila1 = mysqli_fetch_assoc($resultado_talles)) {
+                                $string_talles .= $fila1['descripcion'] . ", ";
+                            ?>
+                                <option value="<?php echo htmlspecialchars($fila1['descripcion']); ?>"><?php echo htmlspecialchars($fila1['descripcion']); ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+
+                        <label for="color">Color:</label>
+                        <select id="color" name="color">
+                            <?php
+                            while ($fila2 = mysqli_fetch_assoc($resultado_color)) {
+                                $string_color .= $fila2['descripcion'] . ", ";
+                            ?>
+                                <option value="<?php echo htmlspecialchars($fila2['descripcion']); ?>"><?php echo htmlspecialchars($fila2['descripcion']); ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+
+                        <label for="cantidad" id="labelCantidad">Cantidad:</label>
+                        <input type="number" name="cdt" id="cantidad" value="1" min="1" max="<?php echo $stock; ?>" />
+
+                        <button type="submit" class="button">Comprar</button>
+                    </form>
+                </div>
+
+                <div id="reserva" style="display: none;">
+                    <form method="GET" class="form reservation-form" action="">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="apellido" name="apellido" required>
+
+                        <label for="dni">DNI:</label>
+                        <input type="text" id="dni" name="dni" required>
+
+                        <label for="telefono">Número de Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="fecha">Selecciona una fecha:</label>
+                        <select id="fecha" name="fecha" required>
+                            <option value="">Seleccione una fecha</option>
+                            <option value="2024-10-25">25 de Octubre 2024</option>
+                            <option value="2024-10-26">26 de Octubre 2024</option>
+                            <option value="2024-10-27">27 de Octubre 2024</option>
+                        </select>
+
+                        <label for="lugar">Selecciona un lugar de retiro:</label>
+                        <select id="lugar" name="lugar" required>
+                            <option value="">Seleccione un lugar</option>
+                            <option value="lugar1">Sucursal Centro</option>
+                            <option value="lugar2">Sucursal Norte</option>
+                            <option value="lugar3">Sucursal Sur</option>
+                            <option value="lugar4">Sucursal Este</option>
+                        </select>
+
+                        <button type="submit" class="button">Reservar</button>
+                    </form>
+                </div>
             </div>
-                    </select>
-
-        <label for="cantidad" id="labelCantidad">Cantidad:</label>
-        <input type="number" name="cdt" id="cantidad" value="1" min="1" max="<?php echo $stock ?>" />
-
-            <button type="submit" class="buy-btn" id="btnMostrarSeccion1">Comprar</button>
-                </form>
-
-
-                <form id="reserva" method="GET" class="reservation-form" action="cdt=<?php echo $cdt?>&color=<?php echo $color ?>&talle=<?php echo $size ?>">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-    
-                <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" required>
-    
-                <label for="dni">DNI:</label>
-                <input type="text" id="dni" name="dni" required>
-    
-                <label for="telefono">Número de Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
-    
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-    
-                <label for="fecha">Selecciona una fecha:</label>
-                <select id="fecha" name="fecha" required>
-                    <option value="">Seleccione una fecha</option>
-                    <option value="2024-10-25">25 de Octubre 2024</option>
-                    <option value="2024-10-26">26 de Octubre 2024</option>
-                    <option value="2024-10-27">27 de Octubre 2024</option>
-                </select>
-    
-                <label for="lugar">Selecciona un lugar de retiro:</label>
-                <select id="lugar" name="lugar" required>
-                    <option value="">Seleccione un lugar</option>
-                    <option value="lugar1">Sucursal Centro</option>
-                    <option value="lugar2">Sucursal Norte</option>
-                    <option value="lugar3">Sucursal Sur</option>
-                    <option value="lugar4">Sucursal Este</option>
-                </select>
-    
-                <button type="submit">Reservar</button>
-            </form>
-            </div>
-        </section>
-
-        <script>
-        document.getElementById('btnMostrarSeccion2').addEventListener('click', function() {
-            document.getElementById('producto').style.display = 'none'; // Ocultar sección 1
-            document.getElementById('reserva').style.display = 'block'; // Mostrar sección 2
-        });
-
-    </script>
-
-        <section class="product-specs">
-            <h3>Especificaciones: </h3>
-            <ul>
-                <li>Descripcion: <?php echo $fila['descripcion_larga']?></li>
-                <li>Colores disponibles: <?php echo $string_color ?></li>
-                <li>Talles: <?php echo $string_talles ?></li>
-                <li>Corte: <?php echo $fila['genero']?></li>
-                <li>Marca: <?php echo $fila['marca']?></li>
-            </ul>
-        </section>
         <?php
-            
+        } else {
+            echo "<p>Producto no encontrado.</p>";
         }
-    
-?>
+        ?>
+    </section>
 
-    </main>
+    <section class="product-specs">
+        <h3>Especificaciones: </h3>
+        <ul>
+            <li>Descripción: <?php echo isset($fila) ? htmlspecialchars($fila['descripcion_larga']) : 'N/A'; ?></li>
+            <li>Colores disponibles: <?php echo !empty($string_color) ? rtrim($string_color, ', ') : 'N/A'; ?></li>
+            <li>Talles: <?php echo !empty($string_talles) ? rtrim($string_talles, ', ') : 'N/A'; ?></li>
+            <li>Corte: <?php echo isset($fila) ? htmlspecialchars($fila['genero']) : 'N/A'; ?></li>
+            <li>Marca: <?php echo isset($fila) ? htmlspecialchars($fila['marca']) : 'N/A'; ?></li>
+        </ul>
+    </section>
+</main>
+
+<script>
+    function showReservationForm(event) {
+        event.preventDefault(); // Evita el envío del formulario
+
+        // Oculta el formulario de producto
+        document.getElementById('producto').style.display = 'none';
+
+        // Muestra el formulario de reserva
+        document.getElementById('reserva').style.display = 'block';
+    }
+</script>
 
     <footer>
         <div class="footer-content">
