@@ -33,7 +33,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Producto</title>
-<link rel="stylesheet" href="producto.css" type="text/css">
+<link rel="stylesheet" href="producto1.css" type="text/css">
 <link rel="shortcut icon" href="../imgs/logo-st-tango.png" type="image/x-icon">
 <body>
     <header>
@@ -96,7 +96,14 @@
                 <p class="price">$<?php echo htmlspecialchars($fila['precio']); ?></p>
                 <p class="description"><?php echo htmlspecialchars($fila['descripcion']); ?></p>
 
-                <div id="producto">
+
+
+
+
+
+
+
+                <div id="producto" class="inputs">
                     <form action="../compra/compra.php" class="form purchase-form" method="get" onsubmit="return showReservationForm(event);">
                         <label for="size">Tamaño:</label>
                         <select id="size" name="size">
@@ -125,12 +132,24 @@
                         <label for="cantidad" id="labelCantidad">Cantidad:</label>
                         <input type="number" name="cdt" id="cantidad" value="1" min="1" max="<?php echo $stock; ?>" />
 
-                        <button type="submit" class="button">Comprar</button>
+                        <div onclick="mostrarElemento1()" type="submit" data-tooltip="Click reserva" class="buttoncom">
+                            <div class="button-wrappercom">
+                            <div class="textcom">Comprar</div>
+                                <span class="iconcom">
+                                <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                            </svg>
+                                </span>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
-                <div id="reserva" style="display: none;">
-                    <form method="GET" class="form reservation-form" action="">
+
+                <div id="reserva" class="ocultar" >
+                    <form method="GET" class="reserva-form" action="">
+
+
                         <label for="nombre">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required>
 
@@ -163,7 +182,16 @@
                             <option value="lugar4">Sucursal Este</option>
                         </select>
 
-                        <button type="submit" class="button">Reservar</button>
+                        <div type="submit" data-tooltip="enviar" class="buttoncom">
+                            <div class="button-wrappercom">
+                            <div class="textcom">Reservar</div>
+                                <span class="iconcom">
+                                <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                            </svg>
+                                </span>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -191,11 +219,33 @@
         event.preventDefault(); // Evita el envío del formulario
 
         // Oculta el formulario de producto
-        document.getElementById('producto').style.display = 'none';
+        //document.getElementById("producto").className = "ocultar";
+        //document.getElementById('producto').style.display = 'none';
+        document.getElementById("producto").classList.add('ocultar');
+        console.log("Producto ocultado");
+
+
+        
+        document.getElementById("reserva").classList.remove('ocultar');
+        document.getElementById("reserva").classList.add('view');
+        console.log("Reserva mostrada");
+
 
         // Muestra el formulario de reserva
-        document.getElementById('reserva').style.display = 'block';
+        //document.getElementById("reserva").className = "view";
+        //document.getElementById('reserva').style.display = 'block';
     }
+
+
+
+
+
+    function mostrarElemento1() {
+        var elemento1 = document.getElementById("producto");
+        var elemento2 = document.getElementById("reserva");
+        elemento1.style.display = "none";
+        elemento2.style.display = "block";
+}
 </script>
 
     <footer>
