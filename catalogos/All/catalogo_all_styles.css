@@ -55,25 +55,99 @@ header:hover{
     width: 100%;
 }
 .sidebar {
-        position: fixed;
-        top: 0;
-        left: -3350px;
-        width: 20%;
-        height: 100%;
-        background-color: #ffffff;
-        color: rgb(0, 0, 0);
-        padding: 1vw;
-        transition: left 0.6s ease;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(10, 10, 10, 0.822);
+    position: fixed;
+    top: 0;
+    left: -35000px;
+    width: 20%;
+    min-width: 100p x;
+    height: 100%;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 1vw;
+    transition: left 0.6s ease;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(10, 10, 10, 0.822);
 
 }
+#sessionlogeada{
+display: flex;
+flex-direction: column;
+flex-wrap: nowrap;
+align-items: center;
+gap: 0px;
+}
+#sessionlogeada h5{
+margin: 0;
+font-size: 13px;
+font-family: 'Barlow';
+font-weight: 500;
+}
 
+#acount{
+
+display: flex;
+justify-content: space-around;
+
+}
+#imgcount{
+width: 5vw;
+}
+#imgcount img{
+width: 100%;
+}
+.cierresesion{
+text-decoration: none;
+text-decoration: none;
+font-family: 'Barlow';
+color: black; 
+}
+#sessionArea{
+display: flex;
+flex-direction: column;
+flex-wrap: nowrap;
+align-items: center;
+gap: 5px;
+}
+.botoncuentas{
+text-decoration: none;
+text-decoration: none;
+font-family: 'Barlow';
+color: black;
+
+
+}
 .sidebar.show {
-    left: 0; /* Aparece desde el lado derecho */
-}
+left: 0; }
 
+a {
+    text-decoration: none;
+  }
+  /* <main-style> ============================ */
+  .botton1 {
+    color: #000000;
+    line-height: 2;
+    position: relative;
+    font-family: barlow;
+  }
+  
+  .botton1::before {
+    content: '';
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #000000;
+    position: absolute;
+    bottom: -.1rem;
+    left: 0;
+    transition: transform .4s, opacity .4s;
+    opacity: 0;
+  }
+  
+  .botton1:hover::before {
+    transform: translateY(-.25rem);
+    opacity: 1;
+  }
 #slider-frame {
     overflow: hidden;
 }
@@ -258,6 +332,7 @@ main {
     margin: 0;
     height: 3.6em;
     overflow: hidden;
+    font-family: 'Barlow';
 
 }
 
@@ -269,19 +344,54 @@ main {
     font-weight: 400;
 }
 
-.comprar {
-    background-color: #a1a5a3;
-    color: white;
+.comprar2 {
+    height: 40px;
+    width: 200px;
+    background-color: #ffffff;
+    border: 2px solid rgb(0, 0, 0);
+    color: #000000;
+    transition: .6s;
+    font-size: 15px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 20px; */
+    overflow: hidden;
+  }
+  
+  .comprar2 span {
+    transform: translateX(10px);
+    transition: .5s;
+    text-decoration: none;
     border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 30px;
-    margin-top: auto;
-}
+  }
+  
+  .comprar2 svg {
+    transform: translateX(-300px);
+    transition: .6s;
+    z-index: 3;
+    height: 20px;
+  }
+  
+  .comprar2:hover {
+    width: 60px;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 20px 20px 96px #bebebe,-20px -20px 96px #ffffff;
+  }
+  
+  .comprar2:hover svg {
+    transform: translateX(-7px);
+  }
+  
+  .comprar2:hover span {
+    transform: translateY(70px);
+    font-size: .1rem;
+  }
+  #botonc{
+text-decoration: none;
 
-.comprar:hover {
-    background-color: #3f3f3f;
-}
+  }
 
 @media (min-width: 520px) {
     .producto {
