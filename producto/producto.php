@@ -18,9 +18,14 @@
         $query_check = "select * from productos where productos_id=".$_GET['id'].";";
         $consulta_talles="select descripcion from producto_talle pt join talle t on pt.talle_id = t.talle_id where pt.producto_id =".$_GET['id'].";";
         $consulta_color = "select descripcion from producto_color pc join color c on pc.color_id = c.color_id where pc.productos_id =" . $_GET['id'] . ";";
+        $sucursales = "select id, direccion from sucursales";
+        $fechas="SELECT id, DATE_FORMAT(fecha, '%d %M %Y %H:%i') AS fecha FROM fechas where fecha > current_date();";
+        
         $resultados= mysqli_query($conexion, $query_check);
         $resultado_talles= mysqli_query($conexion, $consulta_talles);
         $resultado_color= mysqli_query($conexion, $consulta_color);
+        $resultado_fechas= mysqli_query($conexion, $fechas);
+        $resultado_sucursales= mysqli_query($conexion, $sucursales);
         $string_talles = "";
         $string_color = "";
     }
@@ -119,9 +124,10 @@
                 <p class="description"><?php echo htmlspecialchars($fila['descripcion']); ?></p>
 
 
-                <div id="producto" class="inputs">
-                    <form action="../compra/compra.php" class="form purchase-form" method="get" onsubmit="return showReservationForm(event);">
-                        <label for="size">Tamaño:</label>
+              
+                    <form action="../compra/compra.php" class="form purchase-form" method="post" >
+                         <div id="producto" class="inputs"> 
+                            <label for="size">Tamaño:</label>
                         <select class="input1"  id="size" name="size">
                             <?php
                             while ($fila1 = mysqli_fetch_assoc($resultado_talles)) {
@@ -158,58 +164,86 @@
                                 </span>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        </div>
 
 
-                <div id="reserva" class="ocultar" >
-                    <form method="GET" class="reserva-form" action="">
+                        <div id="reserva" class="ocultar" >
 
+                            <label for="nombre">Nombre:</label>
+                            <input class="input1" type="text" id="nombre" name="nombre" required>
 
-                        <label for="nombre">Nombre:</label>
-                        <input class="input1" type="text" id="nombre" name="nombre" required>
+                            <label for="apellido">Apellido:</label>
+                            <input class="input1" type="text" id="apellido" name="apellido" required>
 
-                        <label for="apellido">Apellido:</label>
-                        <input class="input1" type="text" id="apellido" name="apellido" required>
+                            <label for="dni">DNI:</label>
+                            <input class="input1" type="text" id="dni" name="dni" required>
 
-                        <label for="dni">DNI:</label>
-                        <input class="input1" type="text" id="dni" name="dni" required>
+                            <label for="telefono">Número de Teléfono:</label>
+                            <input class="input1" type="tel" id="telefono" name="telefono" required>
 
-                        <label for="telefono">Número de Teléfono:</label>
-                        <input class="input1" type="tel" id="telefono" name="telefono" required>
+                            <label for="email">Email:</label>
+                            <input class="input1" type="email" id="email" name="email" required>
 
-                        <label for="email">Email:</label>
-                        <input class="input1" type="email" id="email" name="email" required>
+                            <label for="fecha">Selecciona una fecha:</label>
+                            <select class="input1"  id="fecha" name="fecha" required>
+                                <option value="">Seleccione una fecha</option>
+                                <?php
+                                while ($fila2 = mysqli_fetch_assoc($resultado_fechas)) {
+                                ?>
+                                    <option value="<?php echo $fila2['id']; ?>"><?php echo htmlspecialchars($fila2['fecha']); ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
 
-                        <label for="fecha">Selecciona una fecha:</label>
-                        <select class="input1"  id="fecha" name="fecha" required>
-                            <option value="">Seleccione una fecha</option>
-                            <option value="2024-10-25">25 de Octubre 2024</option>
-                            <option value="2024-10-26">26 de Octubre 2024</option>
-                            <option value="2024-10-27">27 de Octubre 2024</option>
-                        </select>
-
-                        <label for="lugar">Selecciona un lugar de retiro:</label>
-                        <select class="input1" id="lugar" name="lugar" required>
-                            <option value="">Seleccione un lugar</option>
-                            <option value="lugar1">Sucursal Centro</option>
-                            <option value="lugar2">Sucursal Norte</option>
-                            <option value="lugar3">Sucursal Sur</option>
-                            <option value="lugar4">Sucursal Este</option>
-                        </select>
-
-                        <div type="submit" data-tooltip="enviar" class="buttoncom">
-                            <div class="button-wrappercom">
-                            <div class="textcom">Reservar</div>
-                                <span class="iconcom">
-                                <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                            </svg>
-                                </span>
+                            <label for="lugar">Selecciona un lugar de retiro:</label>
+                            <select class="input1" id="lugar" name="lugar" required>
+                                <option value="">Seleccione un lugar</option>
+                                <?php
+                                while ($fila2 = mysqli_fetch_assoc($resultado_sucursales)) {
+                                ?>
+                                    <option value="<?php echo $fila2['id']; ?>"><?php echo htmlspecialchars($fila2['direccion']); ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                     <?php 
+                     if ($logeado){
+                     ?>
+                        <button type="submit" class="envio">
+                            <div type="submit" data-tooltip="enviar" class="buttoncom">
+                                <div class="button-wrappercom">
+                                <div class="textcom">Reservar</div>
+                                    <span class="iconcom">
+                                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                                </svg>
+                                    </span>
+                                </div>
                             </div>
+                        </button>
+                        <?php 
+                     }
+                     else {
+                        ?>
+                        <a href="../inicio sesion/inicio_sesion_index.html" class="envio">
+                            <div type="submit" data-tooltip="Inicie sesión" class="buttoncom">
+                                <div class="button-wrappercom">
+                                <div class="textcom">Inicie sesión</div>
+                                    <span class="iconcom">
+                                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                                </svg>
+                                    </span>
+                                </div>
+                            </div>
+                     </a>
+                    <?php
+                     }
+                     ?>
                         </div>
                     </form>
-                </div>
+
             </div>
         <?php
         } else {
@@ -231,27 +265,6 @@
 </main>
 
 <script>
-    function showReservationForm(event) {
-        event.preventDefault(); // Evita el envío del formulario
-
-        // Oculta el formulario de producto
-        //document.getElementById("producto").className = "ocultar";
-        //document.getElementById('producto').style.display = 'none';
-        document.getElementById("producto").classList.add('ocultar');
-        console.log("Producto ocultado");
-
-
-        
-        document.getElementById("reserva").classList.remove('ocultar');
-        document.getElementById("reserva").classList.add('view');
-        console.log("Reserva mostrada");
-
-
-        // Muestra el formulario de reserva
-        //document.getElementById("reserva").className = "view";
-        //document.getElementById('reserva').style.display = 'block';
-    }
-
 
 
 
@@ -260,7 +273,7 @@
         var elemento1 = document.getElementById("producto");
         var elemento2 = document.getElementById("reserva");
         elemento1.style.display = "none";
-        elemento2.style.display = "block";
+        elemento2.style.display = "flex";
 }
 </script>
 

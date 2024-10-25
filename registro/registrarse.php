@@ -29,8 +29,7 @@
         $resultado_insert = mysqli_query($conexion, $query_insert);
 
         if ($resultado_insert) {
-            echo "Registro exitoso.";
-            header("Location: ../pagina/pagina_web_header.php");
+            header("Location: ../inicio sesion/inicio_sesion_index.html");
 
         } else {
             echo "Error al registrar: " . mysqli_error($conexion);

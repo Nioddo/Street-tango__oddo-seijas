@@ -4,6 +4,7 @@
 
 .ocultar{
     display: none;
+    flex-direction: column;
 }
 .view{
     display: flex;
@@ -209,12 +210,13 @@ main {
   margin-bottom: 40px;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 @media(min-width: 550px){
   .product-details {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 0px;
   flex-direction: row;
 }
@@ -283,7 +285,11 @@ main {
   margin: 10px 0 5px;}
 
 
-
+.envio{
+  background-color: none;
+  border: none;
+  background: none;
+}
 
 .button {
   background-color: #919191;
@@ -302,8 +308,10 @@ main {
 
 
 
-
-
+.inputs{
+  display: flex;
+  flex-direction: column;
+}
 
 .buttoncom {
     --width: 100px;
