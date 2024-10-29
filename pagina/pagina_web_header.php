@@ -264,7 +264,7 @@
     </ul>
         </div>
         <div class="footer-bottom">
-        <p>&copy; 2024 Street Tango | Todos los derechos reservados | Diseñado por <span>Nicolas oddo</span></p>
+        <p>&copy; 2024 Street Tango | Todos los derechos reservados | Diseñado por <span>Nicolas oddo y 1% Juan Luca Seijas Procopio</span></p>
         </div>
     </footer>
     
